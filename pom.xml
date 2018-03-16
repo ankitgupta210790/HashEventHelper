@@ -1,12 +1,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.hash</groupId>
+	<groupId>com.github.ankitgupta210790</groupId>
 	<artifactId>hash</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0-Snapshot</version>
 	<packaging>jar</packaging>
 
 	<name>Hash</name>
+	<description>Hash Event Helper</description>
+	<url>https://github.com/ankitgupta210790/HashEventHelper</url>
+	
+	 <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  
+  <developers>
+    <developer>
+      <name>Ankit Gupta</name>
+      <email>ankitgupta210790@yahoo.com</email>
+      <organization>Harman</organization>
+      <organizationUrl>http://www.harman.com</organizationUrl>
+    </developer>
+  </developers>
+  
+  <scm>
+    <connection>scm:git:git://github.com/ankitgupta210790/HashEventHelper.git</connection>
+    <developerConnection>scm:git:ssh:github.com:ankitgupta210790/HashEventHelper.git</developerConnection>
+    <url>https://github.com/ankitgupta210790/HashEventHelper/tree/master</url>
+   </scm>
+   
 	<dependencies>
 		<dependency>
 			<groupId>com.squareup.retrofit2</groupId>
