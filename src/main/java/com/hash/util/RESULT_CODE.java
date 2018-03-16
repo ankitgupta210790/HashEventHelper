@@ -1,0 +1,5 @@
+package com.hash.util;
+
+public enum RESULT_CODE {
+	SUCCESS, UNKNOWN_ERROR, BAD_REQUEST, UNAUTHORIZED_ACCESS
+}
