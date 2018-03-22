@@ -35,7 +35,7 @@ public class RequestWrapper<T> implements Callback<T> {
 					baseEventHelper.onFailure(requestId,
 							new Result(RESULT_CODE.UNAUTHORIZED_ACCESS, "Error code 401 Unauthorized access. Please try with the new access token"));
 				} else {
-					baseEventHelper.onFailure(requestId, new Result(RESULT_CODE.UNKNOWN_ERROR,"Error code " + arg1.code() + " Error occurred"));
+					baseEventHelper.onFailure(requestId, new Result(RESULT_CODE.UNKNOWN_ERROR,"Error code " + arg1.code() + " Error occurred "+ arg1.message()));
 				}
 			}
 		}

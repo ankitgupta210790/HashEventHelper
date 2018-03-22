@@ -1,33 +1,38 @@
 package com.hash.helper;
 
 import com.hash.model.Result;
-import com.hash.model.google_event.GoogleEvent;
+import com.hash.model.microsoft_event.MicrosoftEvent;
 import com.hash.network.RequestWrapper;
 import com.hash.network.ResponseHandler;
 import com.hash.network.RetrofitClient;
 import com.hash.network.RetrofitClient.REQUEST_ID;
+import com.hash.util.Constants;
 import com.hash.util.DataException;
 import com.hash.util.RESULT_CODE;
 import com.hash.util.Utils;
 
-class GoogleEventHandler extends BaseEventHelper<GoogleEvent> {
+public class MicrosoftEventHandler extends BaseEventHelper<MicrosoftEvent> {
+
 	private ResponseHandler handler;
 
 	@Override
-	public boolean setReminder(String accessToken, GoogleEvent e, ResponseHandler handler) throws DataException {
+	public boolean setReminder(String accessToken, MicrosoftEvent e, ResponseHandler handler) throws DataException {
+
 		if (accessToken == null || accessToken.isEmpty()) {
 			throw new DataException("Please provide a valid access token");
 		}
+
 		if (isValid(e)) {
 			this.handler = handler;
 			RetrofitClient.getInstance().getApiServices()
-					.setReminder(e.getCalenderId(), e, "Bearer " + accessToken, "application/json")
-					.enqueue(new RequestWrapper<GoogleEvent>(REQUEST_ID.SET_GOOGLE_REMINDER, this));
+					.setReminder(Constants.MICROSOFT_CALENDAR_API_URL, e, Constants.BEARER_AUTH_TYPE + accessToken,
+							Constants.REQUEST_HEADER_CONTENT_TYPE_JSON)
+					.enqueue(new RequestWrapper<MicrosoftEvent>(REQUEST_ID.SET_MICROSOFT_EVENT, this));
 		}
 		return false;
 	}
 
-	private boolean isValid(GoogleEvent e) throws DataException {
+	private boolean isValid(MicrosoftEvent e) throws DataException {
 		if (e == null) {
 			throw new DataException("Event object cannot be null, Provide valid event object");
 		}
@@ -49,19 +54,12 @@ class GoogleEventHandler extends BaseEventHelper<GoogleEvent> {
 		if (!Utils.isValidTime(e.getEnd().getDateTime())) {
 			throw new DataException("Please enter end time in valid format(iso8601)");
 		}
-		if (!Utils.isValidTime(e.getEnd().getDateTime())) {
-			throw new DataException("Please enter end time in valid format(iso8601)");
-		}
 
 		if (!Utils.isValidTime(e.getStart().getDateTime())) {
 			throw new DataException("Please enter start time in valid format(iso8601)");
 		}
 
-		if (e.getCalenderId() == null || e.getCalenderId().isEmpty()) {
-			throw new DataException("Please enter a valid calendar id. (Email of user)");
-		}
 		return true;
-
 	}
 
 	public void onFailure(REQUEST_ID id, Result result) {
@@ -72,11 +70,10 @@ class GoogleEventHandler extends BaseEventHelper<GoogleEvent> {
 
 	}
 
-	public void onSuccess(REQUEST_ID id, GoogleEvent t) {
+	public void onSuccess(REQUEST_ID id, MicrosoftEvent t) {
 		System.out.println(t.toString());
 		if (handler != null) {
 			handler.onResponseReceived(new Result(RESULT_CODE.SUCCESS, "Request has been successfully executed"));
 		}
 	}
-
 }

@@ -2,15 +2,15 @@
 package com.hash.model.google_event;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.hash.model.Event;
 
-public class Event {
+public class GoogleEvent extends Event {
 
-	private String calenderId;
-
-	public Event(String calenderId) {
-		this.calenderId = calenderId;
+	public GoogleEvent(String calenderId) {
+		super(calenderId);
 	}
 
 	@SerializedName("kind")
@@ -432,15 +432,8 @@ public class Event {
 		this.attachments = attachments;
 	}
 
-	public void setCalenderId(String calenderId) {
-		this.calenderId = calenderId;
-	}
-
-	public String getCalenderId() {
-		return calenderId;
-	}
-
 	public String toString() {
+		
 		// TODO Auto-generated method stub
 		return "ID: " + id + " Status: " + status + " Start Time: " + start.getDateTime() + " end Time: "
 				+ end.getDateTime() + " Summary: " + summary;
